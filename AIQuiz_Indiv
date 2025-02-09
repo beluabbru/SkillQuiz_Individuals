@@ -1,0 +1,79 @@
+import streamlit as st
+import pandas as pd
+
+def get_learning_recommendation(score):
+    if score <= 6:
+        return "Beginner", "Focus on AI Literacy, Basic AI Interaction, and Ethical Awareness.", "Google AI Crash Course, YouTube: AI for Beginners"
+    elif score <= 11:
+        return "Early Intermediate", "Improve AI prompting, apply AI for task automation, and gain confidence in AI workflows.", "OpenAI Prompt Engineering Guide, Video: Improving AI Prompts"
+    elif score <= 16:
+        return "Intermediate", "Use AI for productivity, decision-making, and workflow automation.", "Harvard Business Review AI Report, AI & Decision Making Video"
+    elif score <= 20:
+        return "Advanced Intermediate", "Strengthen AI data interpretation, industry-specific applications, and ethical AI use.", "MIT Sloan AI Strategy Course, AI Ethics Video"
+    elif score <= 23:
+        return "Advanced", "Apply AI strategically, optimize workflows, and prepare for AI leadership.", "McKinsey AI Adoption Report, AI Strategy Video"
+    else:
+        return "Expert", "Drive AI adoption at scale, innovate AI strategies, and mentor others.", "MIT AI Governance Course, AI Leadership Video"
+
+def main():
+    st.title("AI Skills Assessment Quiz")
+    st.write("Answer the following questions to assess your AI proficiency.")
+    
+    score = 0
+    
+    q1 = st.radio("What is a fundamental limitation of Generative AI?", 
+                  ["A) AI can create original ideas and think critically.",
+                   "B) AI always provides factual and unbiased information.",
+                   "C) AI generates responses based on past data patterns and does not 'understand' meaning.",
+                   "D) AI operates independently without human guidance."])
+    if q1 == "C) AI generates responses based on past data patterns and does not 'understand' meaning.":
+        score += 1
+    
+    q2 = st.radio("Which of the following improves AI-generated responses?", 
+                  ["A) Rephrasing the prompt with more context.",
+                   "B) Accepting the first AI response as the best.",
+                   "C) Using generic prompts.",
+                   "D) Avoiding iterative refinement."])
+    if q2 == "A) Rephrasing the prompt with more context.":
+        score += 1
+    
+    q3 = st.radio("How can AI best assist in productivity?", 
+                  ["A) Generating meeting summaries and task lists.",
+                   "B) Replacing all decision-making roles.",
+                   "C) Automating all workflow approvals without oversight.",
+                   "D) Avoiding AI use in productivity."])
+    if q3 == "A) Generating meeting summaries and task lists.":
+        score += 2
+    
+    q4 = st.radio("How should AI predictions be validated?", 
+                  ["A) Act immediately without verification.",
+                   "B) Compare AI insights with internal data and external trends.",
+                   "C) Ignore AI insights.",
+                   "D) Use AI predictions without human review."])
+    if q4 == "B) Compare AI insights with internal data and external trends.":
+        score += 2
+    
+    q5 = st.radio("How can AI improve hiring and workforce planning?", 
+                  ["A) Automating resume screening.",
+                   "B) Making final hiring decisions without humans.",
+                   "C) Removing all biases from hiring automatically.",
+                   "D) Ignoring AI in recruitment."])
+    if q5 == "A) Automating resume screening.":
+        score += 3
+    
+    q6 = st.radio("What’s the best way to ensure employees adapt to AI-driven changes?", 
+                  ["A) Provide AI training for employees.",
+                   "B) Avoid using AI in workflows.",
+                   "C) Remove human oversight in AI workflows.",
+                   "D) Implement AI without communicating changes."])
+    if q6 == "A) Provide AI training for employees.":
+        score += 4
+    
+    # Show results
+    level, focus, resources = get_learning_recommendation(score)
+    st.subheader("Your AI Proficiency Level: " + level)
+    st.write("**Focus Areas:**", focus)
+    st.write("**Recommended Resources:**", resources)
+
+if __name__ == "__main__":
+    main()
